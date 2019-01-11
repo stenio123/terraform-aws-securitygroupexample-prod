@@ -4,9 +4,16 @@ provider "aws" {
   version = "=1.55.0"
 }
 
+data "terraform_remote_state" "vpc" {
+  backend = "atlas"
+  config {
+    name = "${var.tfe_org}/${var.vpc_workspace}"
+  }
+}
 resource "aws_security_group" "only_internal_traffic" {
   name        = "only_internal_traffic"
   description = "Allow specific internal traffic"
+  vpc_id  = "${data.terraform_remote_state.vpc.vpc_id}"
 
   ingress {
     from_port   = 3306
