@@ -18,21 +18,21 @@ resource "aws_security_group" "only_internal_traffic" {
   ingress {
     from_port   = 3306
     to_port     = 3306
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = ["10.0.1.0/24"]
   }
 
   ingress {
     from_port   = 6379
     to_port     = 6379
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = ["10.0.1.0/24"]
   }
 
   ingress {
     from_port   = 8200
     to_port     = 8200
-    protocol    = "-1"
+    protocol    = "tcp"
     cidr_blocks = ["10.0.1.0/24"]
   }
 
